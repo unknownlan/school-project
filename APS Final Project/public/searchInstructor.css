@@ -1,0 +1,63 @@
+#search_box {
+    background-color: #94ddff;
+    width: 80%;
+}
+
+#search_bar {
+    padding-top: 20px;
+}
+
+#search-text {
+    margin-top: -10px;
+    width: 80%;
+}
+
+.skill-image {
+    box-shadow: 10px 8px 8px 0 rgba(22, 22, 26, 0.18);
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    width: 286px;
+    height: 190px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    background-color: #E5FAFF;
+    box-shadow: 10px 8px 8px 0 rgba(22, 22, 26, 0.18);
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    margin-bottom: 10px;
+}
+
+#profile_box {
+    background-color: #E5FAFF;
+}
+
+#profile_content_box {
+    background-color: #E5FAFF;
+    padding-top: 30px;
+}
+
+#profile_img {
+    box-shadow: 10px 8px 8px 0 rgba(22, 22, 26, 0.18);
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    width: 270px;
+    height: auto;
+    margin-top: 30px;
+}
+
+.form-select {
+    background-color: #E5FAFF !important;
+}
+
+#profile_button {
+    width: 70%;
+}
+
+#profile_container {
+    width: 65%;
+}

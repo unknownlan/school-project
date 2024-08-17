@@ -1,0 +1,49 @@
+#option_button {
+    font-size: 150%;
+    border: none;
+    color: black;
+}
+
+.btn-info {
+    border-radius: 20px !important;
+    background-color: #B2F0FF !important;
+    overflow: hidden;
+}
+
+.btn-info:hover {
+    background-color: #5d96a3 !important;
+}
+
+.btn-secondary {
+    border-radius: 20px !important;
+    background-color: #E5FAFF !important;
+    overflow: hidden;
+}
+
+.btn-secondary:hover {
+    background-color: #5d96a3 !important;
+}
+
+.left_login_box {
+    background-color: #E5FAFF;
+    height: 500px;
+}
+
+.right_login_box {
+    background-color: #B2F0FF;
+    height: 500px;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+#student_login_box {
+    background-color: #E5FAFF;
+    width: 30%;
+}
+
+#instructor_login_box {
+    background-color: #E5FAFF;
+    width: 30%;
+}

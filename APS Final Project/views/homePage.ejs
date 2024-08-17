@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/main.css" />
+  <link rel="stylesheet" type="text/css" href="/backgroundImg.css" />
+  <link rel="stylesheet" type="text/css" href="/carousel.css" />
+  <title>SkillBuild - Home</title>
+
+  <!-- Bootstrap link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <!-- Bootstrap link -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</head>
+
+<!-- START NAVIGATION BAR -->
+<header role="banner">
+  <div id="student_status" value="<%= studentActive %>"></div>
+  <div id="instructor_status" value="<%= instructorActive %>"></div>
+
+  <nav class="navbar navbar-expand-md" id="navigation_bar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" id="navigation_item"><b>SKILLBUILD</b></a>
+      <a class="nav-link" href="/" id="navigation_item"><b>HOME</b></a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link active" aria-current="page" href="/search-instructor" id="navigation_item"><b>SEARCH
+            INSTRUCTOR</b></a>
+        <a class="nav-link" href="/login" id="nav_login"><b>LOGIN</b></a>
+        <a class="nav-link" href="/sign-up" id="nav_signup"><b>SIGN UP</b></a>
+        <a class="nav-link" href="/logout" id="nav_logout"><b>LOGOUT</b></a>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- END NAVIGATION BAR -->
+
+<body>
+  <!-- START OUR SERVICE -->
+  <div class="container text-center my-5 py-4" id="our_service_box">
+    <div class="row">
+      <div class="col-md">
+        <img id="our_service_img"
+          src="https://media.istockphoto.com/id/1471444483/photo/customer-satisfaction-survey-concept-users-rate-service-experiences-on-online-application.jpg?s=612x612&w=0&k=20&c=HFh1o4JU68KWv7PXgbLdIZT0_qepmgePEkvbsLJr5p0=" />
+      </div>
+      <div class="col-md">
+        <h2><b>OUR SERVICE</b></h2>
+        <p>We design to connect students with skilled instructors for a personalized learning experience. With our
+          service, tutoring transcended traditional boundaries, making quality tutoring accessible to students.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- END OUR SERVICE -->
+
+  <!-- POPULAR SKILLS -->
+  <div class="container-fluid text-center pb-3">
+    <h2><b>POPULAR SKILLS</b></h2>
+  </div>
+
+  <!-- START POPULAR SKILLS CAROUSEL -->
+  <template id="skills-carousel">
+    <div class="card-carousel-wrapper">
+      <div class="card-carousel--nav__left" @click="moveCarousel(-1)" :disabled="atHeadOfList"></div>
+      <div class="card-carousel-skills">
+        <div class="card-carousel--overflow-container">
+          <div class="card-carousel-cards" :style="{ transform: 'translateX(' + currentOffset + 'px)'}">
+            <div class="card-carousel--card" v-for="item in items">
+              <div class="card-carousel--card--header">
+                <p>{{ item.name }}</p>
+              </div>
+              <img width="200px" height="150px" :src="item.image" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-carousel--nav__right" @click="moveCarousel(1)" :disabled="atEndOfList"></div>
+    </div>
+  </template>
+
+  <div class="align-items-center" id="app-skills-carousel">
+    <carousel></carousel>
+  </div>
+  <!-- END POPULAR SKILLS CAROUSEL -->
+
+  <!-- INSPIRATIONAL STORIES -->
+  <div class="container-fluid text-center pb-3">
+    <h2><b>INSPIRATIONAL STORIES</b></h2>
+  </div>
+
+  <!-- START INSPIRATIONAL STORIES CAROUSEL -->
+  <template id="stories-carousel">
+    <div class="card-carousel-wrapper">
+      <div class="card-carousel--nav__left" @click="moveCarousel(-1)" :disabled="atHeadOfList"></div>
+      <div class="card-carousel-stories">
+        <div class="card-carousel--overflow-container">
+          <div class="card-carousel-cards" :style="{ transform: 'translateX(' + currentOffset + 'px)'}">
+            <div class="card-carousel--card" v-for="item in items">
+              <img width="200px" height=auto :src="item.image" />
+              <div class="card-carousel--card--header">
+                <p>{{ item.name }}</p>
+              </div>
+              <div class="card-carousel--card--content">
+                <p>{{ item.content }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-carousel--nav__right" @click="moveCarousel(1)" :disabled="atEndOfList"></div>
+    </div>
+  </template>
+
+  <div id="app-stories-carousel">
+    <carousel></carousel>
+  </div>
+  <!-- END INSPIRATIONAL STORIES CAROUSEL -->
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script>
+
+</body>
+
+<script>
+  // START SKILLS CAROUSEL
+  Vue.component("carousel", {
+    template: "#skills-carousel",
+    data() {
+      return {
+        currentOffset: 0,
+        windowSize: 3,
+        paginationFactor: 240,
+        items: [
+          {
+            name: 'BADMINTON',
+            image: 'https://cdn.firstcry.com/education/2022/07/25185734/Essay-On-My-Favourite-Game-Badminton-10-Lines-Short-and-Long-Essay-For-Kids.jpg'
+          },
+          {
+            name: 'SWIMMING',
+            image: 'https://www.justswim.com.sg/wp-content/uploads/unnamed-26.jpg'
+          },
+          {
+            name: 'PIANO',
+            image: 'https://media.istockphoto.com/id/1129332575/photo/favorite-classical-music-close-up-view-of-gentle-female-hands-playing-a-melody-on-piano-while.jpg?s=612x612&w=0&k=20&c=GJEJTdGtmgHpKjDL7BE9KO2diJNQ4lPinInWiJAOSCQ='
+          },
+          {
+            name: 'FOOTBALL',
+            image: 'https://miro.medium.com/v2/resize:fit:1100/format:webp/1*BEbI7NFgV0VCI2cCi6pGEg.jpeg'
+          },
+          {
+            name: 'PAINTING',
+            image: 'https://creativelifeadventures.com/wp-content/uploads/2022/06/Woman-paiting-flowers-768x496.jpeg'
+          },
+          {
+            name: 'GUITAR',
+            image: 'https://www.rollingstone.com/wp-content/uploads/2023/09/best-acoustic-guitars.jpg?w=1581&h=1054&crop=1'
+          },
+          {
+            name: 'DANCE',
+            image: 'https://static.wixstatic.com/media/c10fd4_045652b262de4ffeb0c28f9f1fd4b324~mv2.jpg/v1/crop/x_0,y_12,w_800,h_508/fill/w_600,h_381,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/HipHop-Web.jpg'
+          },
+          {
+            name: 'HOCKEY',
+            image: 'https://medias.paris2024.org/uploads/2020/11/Hockey-femmes.jpeg?x-oss-process=image/resize,w_2508,h_1672,m_lfit/format,jpeg'
+          },
+          {
+            name: 'KARATE',
+            image: 'https://t3.ftcdn.net/jpg/01/27/09/22/360_F_127092211_76cbMikJKTB6Ms2rDjLGgnsLEOvCLhHI.jpg'
+          }
+        ]
+      }
+    },
+    computed: {
+      atEndOfList() {
+        return this.currentOffset <= (this.paginationFactor * -1) * (this.items.length - this.windowSize);
+      },
+      atHeadOfList() {
+        return this.currentOffset === 0;
+      },
+    },
+    methods: {
+      moveCarousel(direction) {
+        if (direction === 1 && !this.atEndOfList) {
+          this.currentOffset -= this.paginationFactor;
+        } else if (direction === -1 && !this.atHeadOfList) {
+          this.currentOffset += this.paginationFactor;
+        }
+      },
+    }
+  });
+
+  new Vue({
+    el: "#app-skills-carousel"
+  });
+  // END SKILLS CAROUSEL
+
+  // START STORIES CAROUSEL
+  Vue.component("carousel", {
+    template: "#stories-carousel",
+    data() {
+      return {
+        currentOffset: 0,
+        windowSize: 2,
+        paginationFactor: 240,
+        items: [
+          {
+            name: 'Music becomes life',
+            image: 'https://img.freepik.com/free-photo/korean-young-man-s-portrait-male-model-white-shirt-standing-looking-concept-human-emotions-facial-expression-front-view-trendy-colors_155003-23619.jpg?t=st=1710077264~exp=1710080864~hmac=dcdd4a36d02ae88bb7090fc60aacea5cc78998e732a9c36916cb47a63c4d2a4a&w=1060',
+            content: 'Jane, a shy teenager with a hidden talent for music,  joined the school guitar club to try something new activity. As the rhythmic beats echoed through the hallways, he found his voice not only in music but also in building connections with his fellow musicians.'
+          },
+          {
+            name: 'Joy of painting',
+            image: 'https://img.freepik.com/free-photo/portrait-happy-asian-woman-smiling-posing-confident-cross-arms-chest-standing-against-studio-background_1258-89269.jpg?t=st=1710073959~exp=1710077559~hmac=f6cefd2062ec820cc3bb950fe82fabe33ee7837f00d97a9287e9632a989126e5&w=1060',
+            content: 'In the heart of the city, Maya discovered her love for painting in an art workshop.In the midst of overwhelming stress , she sought solace in an unexpected passion.She discovered that painting is not only a refuge from stress but also a source of joy and rejuvenation.'
+          },
+          {
+            name: 'Songs of love',
+            image: 'https://img.freepik.com/free-photo/waist-up-portrait-handsome-serious-unshaven-male-keeps-hands-together-dressed-dark-blue-shirt-has-talk-with-interlocutor-stands-against-white-wall-self-confident-man-freelancer_273609-16320.jpg?t=st=1710074903~exp=1710078503~hmac=7287e6b2a4379c4d1f36cf389ec2782263574b2dbd49e5141e65d16ab1f5353c&w=1060',
+            content: 'With a guitar strapped across his back and a melody in his heart, Daniel roamed the streets, serenading passersby with songs of love and longing, his music becoming a beacon of hope in the hustle and bustle of city life.'
+          },
+          {
+            name: 'Soccer Passion',
+            image: 'https://img.freepik.com/free-photo/young-asian-woman-looks-with-confidence-cross-arms-chest-smiles-camera-stands-orange-sw_1258-167202.jpg?t=st=1710073666~exp=1710077266~hmac=f81bfba39195a2e41334b95ee480b511811c8a73def493c07c661f2969695fc3&w=1060',
+            content: 'With a flick of her wrist, Sarah sent the soccer ball soaring across the field, her passion for the game igniting a fire within. As she dribbled past opponents, she felt the thrill of teamwork and the joy of victory, knowing that every goal scored was a testament to her dedication and resilience.'
+          }
+        ]
+      }
+    },
+    computed: {
+      atEndOfList() {
+        return this.currentOffset <= (this.paginationFactor * -1) * (this.items.length - this.windowSize);
+      },
+      atHeadOfList() {
+        return this.currentOffset === 0;
+      },
+    },
+    methods: {
+      moveCarousel(direction) {
+        if (direction === 1 && !this.atEndOfList) {
+          this.currentOffset -= this.paginationFactor;
+        } else if (direction === -1 && !this.atHeadOfList) {
+          this.currentOffset += this.paginationFactor;
+        }
+      },
+    }
+  });
+
+  new Vue({
+    el: "#app-stories-carousel"
+  });
+  // END STORIES CAROUSEL
+
+  var student_status = document.querySelector('#student_status');
+  var instructor_status = document.querySelector('#instructor_status');
+
+  if (student_status.getAttribute('value') == "true" || instructor_status.getAttribute('value') == "true") {
+    document.getElementById('nav_login').style.display = 'none';
+    document.getElementById('nav_signup').style.display = 'none';
+  }
+  else {
+    document.getElementById('nav_logout').style.display = 'none';
+  }
+</script>
+
+<!-- START FOOTER -->
+<footer role="contentinfo">
+  <div class="container-fluid">
+    <div class="row py-2" id="footer_heading">
+      <div class="col-6">
+        <h5>TERMS AND CONDITIONS</h5>
+      </div>
+      <div class="col-6">
+        <h5>CONTACT US</h5>
+      </div>
+    </div>
+    <div class="row pt-3">
+      <div class="col-6">
+        <p>By accessing and using our platform, you agree to abide by the following terms and conditions.</p>
+        <ul>
+          <li>Instructors and students alike commit to respectful and professional communication.</li>
+          <li>Instructors are responsible for delivering accurate and helpful information, while students are expected
+            to engage
+            earnestly in the learning process.</li>
+          <li>The web application reserves the right to moderate content and suspend users who violate these terms.</li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <div class="row py-2">
+          <div class="col-1 d-flex justify-content-end align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" fill="currentColor" class="bi bi-envelope"
+              viewBox="0 0 16 16">
+              <path
+                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+            </svg>
+          </div>
+          <div class="col-5">
+            <p>Email:</p>
+            <p id="contact_us_info">APGAISLSE@GMAIL.COM:</p>
+          </div>
+        </div>
+        <div class="row py-2">
+          <div class="col-1 d-flex justify-content-end align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" fill="currentColor" class="bi bi-instagram"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
+            </svg>
+          </div>
+          <div class="col-5">
+            <p>Instagram:</p>
+            <p id="contact_us_info">@APGAISLSE99</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- END FOOTER -->
+
+</html>

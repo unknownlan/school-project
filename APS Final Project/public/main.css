@@ -1,0 +1,45 @@
+#navigation_bar {
+    background-color: #03045e;
+}
+
+#navigation_item {
+    color: white;
+}
+
+#nav_login {
+    color: white;
+}
+
+#nav_signup {
+    color: white;
+}
+
+#nav_logout {
+    color: white;
+}
+
+#footer_heading {
+    background-color: #03045e;
+    color: white;
+}
+
+#our_service_box {
+    background-color: #94ddff;
+    width: 70%;
+}
+
+#our_service_img {
+    width: 95%;
+}
+
+#contact_us_info {
+    margin-top: -15px;
+}
+
+#contact_us_info {
+    margin-top: -15px;
+}
+
+footer {
+    background-color: white;
+}
